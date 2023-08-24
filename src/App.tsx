@@ -1,11 +1,5 @@
-
-
 function App() {
-
-  return (
-    <>
-    </>
-  )
+  return <>Test app!</>;
 }
 
-export default App
+export default App;
