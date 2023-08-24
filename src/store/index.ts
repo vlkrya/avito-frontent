@@ -1,7 +1,12 @@
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
+import { api } from './api';
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    [api.reducerPath]: api.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
 });
 
 type AppDispatch = typeof store.dispatch;
@@ -15,3 +20,4 @@ type AppThunk<ReturnType = void> = ThunkAction<
 
 export type { AppDispatch, RootState, AppThunk };
 export { store };
+export * from './games';
