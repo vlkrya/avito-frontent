@@ -1,5 +1,13 @@
 import { gamesApi } from '.';
 
-const { useGetGamesQuery } = gamesApi;
+const {
+  useGetGamesQuery,
+  useGetFilteredGamesByGenresAndPlatformQuery,
+  useGetGamesByIdQuery,
+} = gamesApi;
 
-export { useGetGamesQuery };
+export {
+  useGetGamesQuery,
+  useGetFilteredGamesByGenresAndPlatformQuery,
+  useGetGamesByIdQuery,
+};
