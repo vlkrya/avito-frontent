@@ -1,20 +1,20 @@
-import { Layout as AppLayout, Space } from 'antd';
+import { Layout as AppLayout } from 'antd';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
 
 function Layout() {
   return (
-    <Space direction="horizontal" size="middle" className="w-full h-full">
-      <AppLayout className="w-full h-full">
+    <div className="w-full h-full">
+      <AppLayout className="w-full h-full bg-transparent">
         <Header />
-        <AppLayout.Content className="w-full h-full">
+        <main className="w-full h-full">
           <Suspense>
             <Outlet />
           </Suspense>
-        </AppLayout.Content>
+        </main>
       </AppLayout>
-    </Space>
+    </div>
   );
 }
 

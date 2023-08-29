@@ -29,7 +29,7 @@ type GameExpandedInfo = Game & {
   status: string;
   description: string;
   game_url: string;
-  minimum_system_requirements: GameSystemRequirements[];
+  minimum_system_requirements: GameSystemRequirements;
   screenshots: GameScreenshot[];
 };
 
