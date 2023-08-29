@@ -5,6 +5,7 @@ import { DefaultOptionType } from 'antd/es/select';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../config';
+import { formateDate } from '../utils/formatDate';
 
 const platformOptions: DefaultOptionType[] = [
   {
@@ -160,9 +161,11 @@ function IndexPage() {
                         title={game.title}
                         description={game.short_description}
                       />
-                      <p>{game.developer}</p>
-                      <p>{game.platform}</p>
-                      <p>{game.genre}</p>
+                      <div className="flex flex-col gap-[2px] text-[14px] mt-2">
+                        <div>{game.publisher}</div>
+                        <div>{game.genre}</div>
+                        <div>{formateDate(game.release_date)}</div>
+                      </div>
                     </Card>
                   </List.Item>
                 )}
