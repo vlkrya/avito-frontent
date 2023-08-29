@@ -68,6 +68,8 @@ const genreOptions: DefaultOptionType[] = [
   },
 ];
 
+const SKELETON_ARRAY = new Array(6).fill(null);
+
 function IndexPage() {
   const navigate = useNavigate();
 
@@ -99,86 +101,79 @@ function IndexPage() {
   const isErrorMessage = typeof error === 'string';
 
   return (
-    <>
-      <Space className="w-full h-full" size={[160, 8]}>
+    <Space direction="vertical" className="w-full h-full">
+      <div className="flex w-full gap-2 p-4 pb-0">
         <Select
           allowClear
-          className="w-full"
           placeholder="Platform"
-          rootClassName="w-full"
+          className="min-w-[150px] w-auto"
+          defaultValue={selectedPlatform}
           onSelect={setSelectedPlatform}
           options={platformOptions}
         />
         <Select
           mode="multiple"
           allowClear
-          className="w-full"
           placeholder="Genre"
-          rootClassName="w-full"
+          className="min-w-[150px] w-auto"
           onClear={onGenreClear}
           onDeselect={onGenreDeselect}
           onSelect={onGenreSelect}
           options={genreOptions}
         />
-      </Space>
-      {isLoading || isFetching ? (
-        <Row gutter={16}>
-          <Col span={8} className="gutter-row">
-            <Card loading className="w-full" />
-          </Col>
-
-          <Col span={8} className="gutter-row">
-            <Card loading className="w-full" />
-          </Col>
-
-          <Col span={8} className="gutter-row">
-            <Card loading className="w-full" />
-          </Col>
-
-          <Col span={8} className="gutter-row">
-            <Card loading className="w-full" />
-          </Col>
-        </Row>
-      ) : (
-        <>
-          {isError ? (
-            <div>Error!{isErrorMessage && error}</div>
-          ) : data?.length ? (
-            <List
-              grid={{
-                gutter: 16,
-                xs: 1,
-                sm: 2,
-                md: 4,
-                lg: 4,
-                xl: 6,
-                xxl: 3,
-              }}
-              dataSource={data}
-              renderItem={(game) => (
-                <Card
-                  hoverable
-                  size="small"
-                  className="max-h-[400px]"
-                  onClick={onCardClick(game.id)}
-                  cover={<img alt={game.title} src={game.thumbnail} />}
-                >
-                  <Meta
-                    title={game.title}
-                    description={game.short_description}
-                  />
-                  <p>{game.developer}</p>
-                  <p>{game.platform}</p>
-                  <p>{game.genre}</p>
-                </Card>
-              )}
-            />
-          ) : (
-            <div>Sorry! No data available</div>
-          )}
-        </>
-      )}
-    </>
+      </div>
+      <div className="p-4 w-full h-full">
+        {isLoading || isFetching ? (
+          <Row gutter={16}>
+            {SKELETON_ARRAY.map(() => (
+              <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
+                <Card loading className="w-full h-[400] m-2" />
+              </Col>
+            ))}
+          </Row>
+        ) : (
+          <>
+            {isError ? (
+              <div>Error!{isErrorMessage && error}</div>
+            ) : data?.length ? (
+              <List
+                grid={{
+                  gutter: 16,
+                  xs: 1,
+                  sm: 2,
+                  md: 4,
+                  lg: 4,
+                  xl: 5,
+                  xxl: 6,
+                }}
+                dataSource={data}
+                renderItem={(game) => (
+                  <List.Item className="w-full h-full">
+                    <Card
+                      hoverable
+                      size="small"
+                      className="h-full w-full overflow-scroll"
+                      onClick={onCardClick(game.id)}
+                      cover={<img alt={game.title} src={game.thumbnail} />}
+                    >
+                      <Meta
+                        title={game.title}
+                        description={game.short_description}
+                      />
+                      <p>{game.developer}</p>
+                      <p>{game.platform}</p>
+                      <p>{game.genre}</p>
+                    </Card>
+                  </List.Item>
+                )}
+              />
+            ) : (
+              <div>Sorry! No data available</div>
+            )}
+          </>
+        )}
+      </div>
+    </Space>
   );
 }
 
