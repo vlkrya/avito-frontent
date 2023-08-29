@@ -1,75 +1,13 @@
-import { Card, Col, Row, Select, Space, List } from 'antd';
+import { Card, Col, Row, Space } from 'antd';
 import { useGetFilteredGamesByGenresAndPlatformQuery } from '../store';
-import Meta from 'antd/es/card/Meta';
-import { DefaultOptionType } from 'antd/es/select';
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../config';
-import { formateDate } from '../utils/formatDate';
+import { GameList } from '../features/GameList';
+import { SelectPanel } from '@/features/SelectPanel';
 
-const platformOptions: DefaultOptionType[] = [
-  {
-    label: 'All',
-    value: null,
-  },
-  {
-    label: 'PC (Windows)',
-    value: 'pc',
-  },
-  {
-    label: 'Browser (Web)',
-    value: 'browser',
-  },
-];
-
-const genreOptions: DefaultOptionType[] = [
-  {
-    label: '3d',
-    value: '3d',
-  },
-  {
-    label: 'MMORPG',
-    value: 'mmorpg',
-  },
-  {
-    label: 'Fantasy',
-    value: 'fantasy',
-  },
-  {
-    label: 'PVP',
-    value: 'pvp',
-  },
-  {
-    label: 'Shooter',
-    value: 'shooter',
-  },
-  {
-    label: 'MOBA',
-    value: 'moba',
-  },
-  {
-    label: 'Batlle Royale',
-    value: 'battle-royale',
-  },
-  {
-    label: 'Sci-Fi',
-    value: 'sci-fi',
-  },
-  {
-    label: 'Racing',
-    value: 'racing',
-  },
-  {
-    label: 'Social',
-    value: 'social',
-  },
-  {
-    label: 'Sports',
-    value: 'sports',
-  },
-];
-
-const SKELETON_ARRAY = new Array(6).fill(null);
+const SKELETON_ARRAY = Array.from({ length: 6 });
 
 function IndexPage() {
   const navigate = useNavigate();
@@ -104,23 +42,11 @@ function IndexPage() {
   return (
     <Space direction="vertical" className="w-full h-full">
       <div className="flex w-full gap-2 p-4 pb-0">
-        <Select
-          allowClear
-          placeholder="Platform"
-          className="min-w-[150px] w-auto"
-          defaultValue={selectedPlatform}
-          onSelect={setSelectedPlatform}
-          options={platformOptions}
-        />
-        <Select
-          mode="multiple"
-          allowClear
-          placeholder="Genre"
-          className="min-w-[150px] w-auto"
-          onClear={onGenreClear}
-          onDeselect={onGenreDeselect}
-          onSelect={onGenreSelect}
-          options={genreOptions}
+        <SelectPanel
+          onPlatformSelect={setSelectedPlatform}
+          onGenreDeselect={onGenreDeselect}
+          onGenreClear={onGenreClear}
+          onGenreSelect={onGenreSelect}
         />
       </div>
       <div className="p-4 w-full h-full">
@@ -137,39 +63,7 @@ function IndexPage() {
             {isError ? (
               <div>Error!{isErrorMessage && error}</div>
             ) : data?.length ? (
-              <List
-                grid={{
-                  gutter: 16,
-                  xs: 1,
-                  sm: 2,
-                  md: 4,
-                  lg: 4,
-                  xl: 5,
-                  xxl: 6,
-                }}
-                dataSource={data}
-                renderItem={(game) => (
-                  <List.Item className="w-full h-full">
-                    <Card
-                      hoverable
-                      size="small"
-                      className="h-full w-full overflow-scroll"
-                      onClick={onCardClick(game.id)}
-                      cover={<img alt={game.title} src={game.thumbnail} />}
-                    >
-                      <Meta
-                        title={game.title}
-                        description={game.short_description}
-                      />
-                      <div className="flex flex-col gap-[2px] text-[14px] mt-2">
-                        <div>{game.publisher}</div>
-                        <div>{game.genre}</div>
-                        <div>{formateDate(game.release_date)}</div>
-                      </div>
-                    </Card>
-                  </List.Item>
-                )}
-              />
+              <GameList games={data} onCardClick={onCardClick} />
             ) : (
               <div>Sorry! No data available</div>
             )}
