@@ -20,7 +20,7 @@ function GameCard(props: GameCardProps) {
       cover={<img alt={game.title} src={game.thumbnail} />}
     >
       <Meta title={game.title} description={game.short_description} />
-      <div className="flex flex-col gap-[2px] text-[14px] mt-2">
+      <div className="flex flex-col gap-[2px] text-[14px] mt-auto">
         <div>{game.publisher}</div>
         <div>{game.genre}</div>
         <div>{formateDate(game.release_date)}</div>

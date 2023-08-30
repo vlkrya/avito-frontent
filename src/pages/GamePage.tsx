@@ -5,7 +5,7 @@ import debounce from 'debounce';
 import { Spin, Carousel, Button } from 'antd';
 import { ROUTES } from '../config';
 import { formateDate } from '../utils/formatDate';
-import { PageInfo } from '@/ui';
+import { PageInfo } from '../ui';
 
 const REFETCH_DEBOUNCE = 1000;
 

@@ -4,10 +4,7 @@ import { useGetFilteredGamesByGenresAndPlatformQuery } from '../store';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../config';
-import { GameList } from '../features/GameList';
-import { SelectPanel } from '@/features/SelectPanel';
-
-const SKELETON_ARRAY = Array.from({ length: 6 });
+import { GameList, SelectPanel, GameListSkeleton } from '../features/';
 
 function IndexPage() {
   const navigate = useNavigate();
@@ -51,17 +48,11 @@ function IndexPage() {
       </div>
       <div className="p-4 w-full h-full">
         {isLoading || isFetching ? (
-          <Row gutter={16}>
-            {SKELETON_ARRAY.map(() => (
-              <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={4}>
-                <Card loading className="w-full h-[400] m-2" />
-              </Col>
-            ))}
-          </Row>
+          <GameListSkeleton />
         ) : (
           <>
             {isError ? (
-              <div>Error!{isErrorMessage && error}</div>
+              <div>Error! {isErrorMessage && error}</div>
             ) : data?.length ? (
               <GameList games={data} onCardClick={onCardClick} />
             ) : (
