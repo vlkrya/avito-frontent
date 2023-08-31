@@ -1,27 +1,34 @@
-# React + TypeScript + Vite
+# Avito-frontend-trainee-assignment-2023
+Этот проект представляет собой интерфейс для сайта Free-To-Play Games. Пользователи могут просматривать список доступных игр, фильтровать и сортировать их, а также просматривать подробную информацию о каждой игре
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Функциональные возможности
 
-Currently, two official plugins are available:
+## Главная страница 
+- Просмотр списка игр
+- Фильтрация игр по платформе и жанру
+- Сортировка игр по дате релиза, популярности и т.д.
+- Индикатор загрузки при ожидании данных
+- Обработка ошибок при неудачных запросах
+## Страница игры
+- Просмотр информации об игре:
+  - Название
+  - Дата релиза
+  - Издатель и разработчик
+  - Жанр
+  - Карусель скриншотов
+  - Системные требования
+- Кнопка для возврата к списку игр
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Технические требования 
+- Используется TypeScript
+- Адаптивный интерфейс
+- Приложение разработано с помощью React 18+ и Redux / Redux Toolkit
+- Интеграция Free-To-Play Games API CORS Support 
+- Роутинг выполнен с использованием React Router v6
+- Фреймворк UI  Ant Design
+- Пакетный менеджер npm
+- Предусмотрена возможность работы с большим количеством игр при помощи пагинации и формировании параметров запроса в адресной строке при изменении фильтрации, сортировки или параметров пагинации
+- Механизм повторных запросов(3 раза) при неудачной загрузке данных
+- Сохранение параметров запроса в адресной строке при переходе на страницу игры и обратно
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
