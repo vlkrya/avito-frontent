@@ -74,25 +74,30 @@ function GamePage() {
               <PageInfo title="Genre" info={data.genre} />
             </div>
 
-            <div className="flex flex-col gap-2">
-              <h2 className="text-[22px] font-semibold">
-                Minimum System Requirements:
-              </h2>
+            {data.minimum_system_requirements && (
+              <div className="flex flex-col gap-2">
+                <h2 className="text-[22px] font-semibold">
+                  Minimum System Requirements:
+                </h2>
 
-              <PageInfo title="OS" info={data.minimum_system_requirements.os} />
-              <PageInfo
-                title="Memory"
-                info={data.minimum_system_requirements.memory}
-              />
-              <PageInfo
-                title="Processor"
-                info={data.minimum_system_requirements.processor}
-              />
-              <PageInfo
-                title="Storage"
-                info={data.minimum_system_requirements.storage}
-              />
-            </div>
+                <PageInfo
+                  title="OS"
+                  info={data.minimum_system_requirements.os}
+                />
+                <PageInfo
+                  title="Memory"
+                  info={data.minimum_system_requirements.memory}
+                />
+                <PageInfo
+                  title="Processor"
+                  info={data.minimum_system_requirements.processor}
+                />
+                <PageInfo
+                  title="Storage"
+                  info={data.minimum_system_requirements.storage}
+                />
+              </div>
+            )}
 
             <div className="flex flex-col gap-2">
               <h2 className="text-[22px] font-semibold">Screenshots:</h2>
