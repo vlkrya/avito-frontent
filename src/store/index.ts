@@ -1,10 +1,22 @@
-import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
+import {
+  Action,
+  ThunkAction,
+  combineReducers,
+  configureStore,
+} from '@reduxjs/toolkit';
 import { api } from './api';
+import app from './app';
+import filters from './filters';
+
+const reducer = combineReducers({
+  [api.reducerPath]: api.reducer,
+  app,
+  filters,
+});
 
 const store = configureStore({
-  reducer: {
-    [api.reducerPath]: api.reducer,
-  },
+  reducer,
+  devTools: import.meta.env.NODE_ENV !== 'production',
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),
 });

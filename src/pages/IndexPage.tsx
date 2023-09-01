@@ -1,4 +1,4 @@
-import { Card, Col, Row, Space } from 'antd';
+import { Space } from 'antd';
 import { useGetFilteredGamesByGenresAndPlatformQuery } from '../store';
 
 import { useState } from 'react';
