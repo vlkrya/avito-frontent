@@ -13,11 +13,11 @@ type Game = {
 };
 
 type GameSystemRequirements = {
-  os: string;
-  processor: string;
-  memory: string;
-  graphics: string;
-  storage: string;
+  os?: string;
+  processor?: string;
+  memory?: string;
+  graphics?: string;
+  storage?: string;
 };
 
 type GameScreenshot = {
